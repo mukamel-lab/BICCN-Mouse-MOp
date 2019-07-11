@@ -3,7 +3,7 @@ from cocluster_cv_utils import *
 # # Configs  
 # In[30]:
 
-name = 'mop_cv_3mods_190710'
+name = 'mop_cv_4mods_190710'
 outdir = '/cndd/fangming/CEMBA/data/MOp_all/results'
 output_results = outdir + '/cross_validation_results_{}.pkl'.format(name)
 output_pcX_all = outdir + '/pcX_all_{}.npy'.format(name)
@@ -27,7 +27,7 @@ hvftrs_cell = os.path.join(DATA_DIR, '{0}_hvfeatures.cell')
 
 mods_selected = [
     'snmcseq_gene',
-    # 'snatac_gene',
+    'snatac_gene',
     'smarter_cells',
     'smarter_nuclei',
     # '10x_cells', 
@@ -37,7 +37,6 @@ mods_selected = [
     # '10x_nuclei_v3_Macosko',
     ]
 
-# features_selected = ['10x_cells']
 features_selected = ['smarter_cells']
 # check features
 for features_modality in features_selected:
