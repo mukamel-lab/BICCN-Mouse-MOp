@@ -225,7 +225,6 @@ def plot_errorbar_fancymin_ax(ax, x, y, yerr, color='C0', label=''):
     x = np.array(x)
     y = np.array(y)
     yerr = np.array(yerr)
-
     plot_errorbar_ax(ax, x, y, yerr, color=color, label=label)
     
     # get minimum and plot
@@ -238,12 +237,18 @@ def plot_errorbar_fancymin_ax(ax, x, y, yerr, color='C0', label=''):
                )
     
     # get minimum + se and plot
-    f = lambda _x: np.interp(_x, x[:min_arg], (y-yerr)[:min_arg]) - min_y
+    epsilon = 0
+    f = lambda _x: np.interp(_x, x[:min_arg], (y-yerr)[:min_arg]) - (min_y + epsilon)
     try:
-        res_root = optimize.root_scalar(f, bracket=(1, min_x))
+        res_root = optimize.root_scalar(f, bracket=(x[0], min_x))
         min_x_se = int(res_root.root+0.5)
     except: 
-        min_x_se = x[0]
+        if np.all(f(x[:min_arg])<0):
+            min_x_se = x[0]
+        elif np.all(f(x[:min_arg])>0):
+            min_x_se = x[min_arg]
+        else:
+            raise ValueError("Dont understand f: {}".format(f(x[:min_arg])))
     ax.plot(min_x_se, min_y, 's', 
                markersize=10,
                color=color,
