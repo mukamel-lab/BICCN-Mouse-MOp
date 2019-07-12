@@ -3,7 +3,7 @@ from cocluster_cv_utils import *
 # # Configs  
 # In[30]:
 
-name = 'mop_cv_8mods_190710'
+name = 'mop_cv_8mods_190711'
 outdir = '/cndd/fangming/CEMBA/data/MOp_all/results'
 output_results = outdir + '/cross_validation_results_{}.pkl'.format(name)
 output_pcX_all = outdir + '/pcX_all_{}.npy'.format(name)
@@ -224,7 +224,8 @@ print(gxc_hvftrs_sub_g1.keys())
 # In[14]:
 
 
-resolutions = [0.5, 1, 2, 3, 4, 6, 8, 12, 16, 20]
+# resolutions = [0.5, 1, 2, 3, 4, 6, 8, 12, 16, 20]
+resolutions = [30, 40, 50, 60, 80, 100]
 (
  res_nclsts, 
  res_mse_mean, res_mse_se, 
