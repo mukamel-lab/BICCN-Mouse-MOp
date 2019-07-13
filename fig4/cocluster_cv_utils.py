@@ -161,11 +161,9 @@ def nfoldcv_scf(gxc_hvftrs_sub_g0, gxc_hvftrs_sub_g1, resolutions, k,
                     
                 # end of n-fold training test for 
                 # each collect 1 data point
-#                 break
                 
             # end of n-repeats for
             # summarize n-repeats into stats
-#             break
             res_mse[mod] = np.array(res_mse[mod])
             res_mse_mean[mod].append(res_mse[mod].mean())
             res_mse_se[mod].append(1.96*res_mse[mod].std()/np.sqrt(nfolds))
@@ -174,10 +172,8 @@ def nfoldcv_scf(gxc_hvftrs_sub_g0, gxc_hvftrs_sub_g1, resolutions, k,
             res_mse_t_mean[mod].append(res_mse_t[mod].mean())
             res_mse_t_se[mod].append(1.96*res_mse_t[mod].std()/np.sqrt(nfolds))
             print('')
-#         break
         # end of n-modality for 
         
-#     break
     # end of resolution for
     
     res_nclsts = np.array(res_nclsts)
@@ -192,13 +188,8 @@ def nfoldcv_scf(gxc_hvftrs_sub_g0, gxc_hvftrs_sub_g1, resolutions, k,
          res_mse_mean, res_mse_se, 
          res_mse_t_mean, res_mse_t_se,
         )
-    
-
-# In[22]:
-
 
 # plotting utils
-
 def plot_errorbar_ax(ax, x, y, yerr, color='C0', label=''):
     """Plot a line with errorbar 
     """
