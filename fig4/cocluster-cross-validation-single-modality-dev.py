@@ -61,19 +61,19 @@ hvftrs_cell = os.path.join(DATA_DIR, '{0}_hvfeatures.cell')
 # In[35]:
 
 
-ps = [0.01, 0.02, 0.05, 0.1, 0.2, 0.5]
+ps = [0.01, 0.02, 0.04, 0.1, 0.2, 0.4, 0.8, 1]
 mods_selected = [
-    # 'snmcseq_gene',
-    # 'snatac_gene',
-    # 'smarter_cells',
-    # 'smarter_nuclei',
+    'snmcseq_gene',
+    'snatac_gene',
+    'smarter_cells',
+    'smarter_nuclei',
     '10x_cells', 
     '10x_nuclei', 
     '10x_cells_v3',
     '10x_nuclei_v3',
     '10x_nuclei_v3_Macosko',
     ]
-resolutions = [0.5, 1, 2, 3, 4, 6, 8, 12, 16, 20, 30, 40, 60, 80, 100]
+resolutions = [0.1, 0.2, 0.4, 0.8, 1, 2, 3, 4, 6, 8, 12, 16, 20, 30, 40, 60, 80, 100]
 logging.info(ps)
 logging.info(' '.join(mods_selected))
 
@@ -85,10 +85,12 @@ for p, mod in itertools.product(ps, mods_selected):
     logging.info(p)
     logging.info(mod)
     
-    name = 'mop_cv_one_dataset_p{}_{}'.format(int(p*100), mod)
+    name = 'mop_cv_one_dataset_p{}_{}_190718'.format(int(p*100), mod)
     outdir = '/cndd/fangming/CEMBA/data/MOp_all/results'
     output_results = outdir + '/cross_validation_results_{}.pkl'.format(name)
     output_figures = outdir + '/figures/{}_{{}}.{{}}'.format(name)
+    output_prefix =  '/cndd/fangming/test_outputs/cluster_cv_single_{}'.format(name)
+
 
     # gene chrom lookup
     chroms = np.arange(1, 20, 1).tolist() + ['X']
@@ -103,6 +105,9 @@ for p, mod in itertools.product(ps, mods_selected):
                        ) # 1:20
 
     metadata = pd.read_csv(meta_f.format(mod), sep="\t").reset_index().set_index(settings[mod].cell_col)
+    if len(metadata)*p < 200:
+        logging.info("Skip ({} {}) (less than 200 cells)".format(p, mod))
+        continue
 
     ti = time.time()
     if settings[mod].mod_category == 'mc':
@@ -138,6 +143,7 @@ for p, mod in itertools.product(ps, mods_selected):
     (
      res_nclsts, res, 
     ) = nfoldcv_random_features_split(gxc_hvftr_sub, resolutions, gene_chrom_lookup,
+                                      output_prefix,
                                       k=30, 
                                       reduce_dim=0,
                                       nfolds=5, n_repeats=5, n_splits=5, split_frac=0.5)
