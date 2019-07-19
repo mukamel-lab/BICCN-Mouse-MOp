@@ -2,3 +2,4 @@
 log_*
 .ipynb*
 __pycache__
+fig4/obsolete
