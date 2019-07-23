@@ -63,8 +63,10 @@ hvftrs_cell = os.path.join(DATA_DIR, '{0}_hvfeatures.cell')
 
 ps = [1]
 mods_selected = [
+    '10x_cells_downsampled_10000reads', 
+    '10x_cells_downsampled_20000reads', 
+    '10x_cells_downsampled_30000reads', 
     '10x_cells', 
-    '10x_cells_downsampled', 
     ]
 resolutions = [0.1, 0.2, 0.4, 0.8, 1, 2, 3, 4, 6, 8, 12, 16, 20, 30, 40, 60, 80, 100]
 logging.info(ps)
@@ -78,7 +80,7 @@ for p, mod in itertools.product(ps, mods_selected):
     logging.info(p)
     logging.info(mod)
     
-    name = 'mop_cv_downsamp_reads_p{}_{}_190718'.format(int(p*100), mod)
+    name = 'mop_cv_downsamp_reads_p{}_{}_190722'.format(int(p*100), mod)
     outdir = '/cndd/fangming/CEMBA/data/MOp_all/results'
     output_results = outdir + '/cross_validation_results_{}.pkl'.format(name)
     output_figures = outdir + '/figures/{}_{{}}.{{}}'.format(name)

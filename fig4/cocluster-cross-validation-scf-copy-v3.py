@@ -46,7 +46,7 @@ mods_selected = [
     '10x_nuclei_v3_Macosko',
     ]
 
-features_selected = ['10x_cells']
+features_selected = ['10x_cells_v3']
 # check features
 for features_modality in features_selected:
     assert (features_modality in mods_selected)
@@ -150,7 +150,7 @@ resolutions = [0.1, 0.2, 0.5, 1, 2, 3, 4, 6, 8, 12, 16, 20, 30, 40, 60, 80, 100,
 ns = [1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000]
 
 for n in ns:
-    name = 'mop_cv_scf_8mods_n{}_190723'.format(n)
+    name = 'mop_cv_scf_8mods_10xv3_n{}_190723'.format(n)
     outdir = '/cndd/fangming/CEMBA/data/MOp_all/results'
     output_results = outdir + '/cross_validation_results_{}.pkl'.format(name)
     output_pcX_all = outdir + '/pcX_all_{}.npy'.format(name)

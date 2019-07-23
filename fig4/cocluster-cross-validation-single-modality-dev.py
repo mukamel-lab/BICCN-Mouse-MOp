@@ -44,7 +44,7 @@ logging.info('*')
 # In[28]:
 
 
-DATA_DIR = '/cndd/fangming/CEMBA/data/MOp_all/organized_neurons_v6'
+DATA_DIR = '/cndd/fangming/CEMBA/data/MOp_all/organized_neurons_v8'
 
 # fixed dataset configs
 sys.path.insert(0, DATA_DIR)
@@ -63,17 +63,16 @@ hvftrs_cell = os.path.join(DATA_DIR, '{0}_hvfeatures.cell')
 
 ps = [0.01, 0.02, 0.04, 0.1, 0.2, 0.4, 0.8, 1]
 mods_selected = [
-    'snmcseq_gene',
+    # 'snmcseq_gene',
     'snatac_gene',
     'smarter_cells',
     'smarter_nuclei',
-    '10x_cells', 
-    '10x_nuclei', 
-    '10x_cells_v3',
-    '10x_nuclei_v3',
-    '10x_nuclei_v3_Macosko',
+    # '10x_cells', 
+    # '10x_cells_v3',
+    # '10x_nuclei_v3',
+    # '10x_nuclei_v3_Macosko',
     ]
-resolutions = [0.1, 0.2, 0.4, 0.8, 1, 2, 3, 4, 6, 8, 12, 16, 20, 30, 40, 60, 80, 100]
+resolutions = [0.1, 0.2, 0.4, 0.8, 1, 2, 3, 4, 6, 8, 12, 16, 20, 30, 40, 60, 80, 100, 120]
 logging.info(ps)
 logging.info(' '.join(mods_selected))
 
