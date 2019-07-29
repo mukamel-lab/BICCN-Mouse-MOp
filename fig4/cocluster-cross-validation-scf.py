@@ -122,35 +122,19 @@ for mod in mods_selected:
     _mat = _gxc_tmp.data
 
     _gene = SCF_utils.standardize_gene_name(_gene)  # standardize gene name  
-    
-#     ## remove duplicated genes (for now)
-#     u, c = np.unique(_gene, return_counts=True)
-#     dup = u[c > 1]
-#     uniq_bool = np.array([False if gene in dup else True for gene in _gene])
-#     _gene_selected = _gene[uniq_bool]
-#     _gene_selected_idx = np.arange(len(_gene))[uniq_bool]
-#     _gene = _gene_selected
-#     _mat = _mat.tocsr()[_gene_selected_idx, :]
-#     ## remove duplicated genes complete
-    
     gxc_hvftrs[mod] = GC_matrix(_gene, _cell, _mat)
     assert np.all(gxc_hvftrs[mod].cell == metas[mod].index.values) # make sure cell name is in the sanme order as metas (important if save knn mat)
     print(gxc_hvftrs[mod].data.shape, time.time()-ti)
     
 
-# # subsample cells
-# p = 1
-# if p < 1:
-#     metas_sub, gxc_hvftrs_sub = subsampling(mods_selected, metas, gxc_hvftrs, p)
-# else:
-#     metas_sub = metas
-#     gxc_hvftrs_sub = gxc_hvftrs
-
 resolutions = [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 3, 4, 6, 8, 12, 16, 20, 30, 40, 60, 80, 100, 120]
-ns = [1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000]
+# ns = [1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000]
+ns = [100000, 200000]
+n_splits = 10
+n_repeats = 5
 
 for n in ns:
-    name = 'mop_cv_scf_8mods_n{}_190724'.format(n)
+    name = 'mop_cv_scf_8mods_n{}_190729'.format(n)
     outdir = '/cndd/fangming/CEMBA/data/MOp_all/results'
     output_results = outdir + '/cross_validation_results_{}.pkl'.format(name)
     output_pcX_all = outdir + '/pcX_all_{}.npy'.format(name)
@@ -172,7 +156,7 @@ for n in ns:
                                           output_imputed_data_format,
                                           k=30, 
                                           reduce_dim=0,
-                                          nfolds=5, n_repeats=5, n_splits=5, split_frac=0.5)
+                                          nfolds=5, n_repeats=n_repeats, n_splits=n_splits, split_frac=0.5)
 
 
     # Saving the objects:
