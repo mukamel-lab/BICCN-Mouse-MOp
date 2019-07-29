@@ -63,8 +63,8 @@ hvftrs_cell = os.path.join(DATA_DIR, '{0}_hvfeatures.cell')
 
 ps = [1]
 mods_selected = [
-    '10x_cells_downsampled_10000reads', 
-    '10x_cells_downsampled_20000reads', 
+    #'10x_cells_downsampled_10000reads', 
+    #'10x_cells_downsampled_20000reads', 
     '10x_cells_downsampled_30000reads', 
     '10x_cells', 
     ]
