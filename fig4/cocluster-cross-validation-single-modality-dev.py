@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[26]:
+# In[1]:
 
 
 import sys
@@ -34,17 +34,17 @@ from cluster_cv_utils import *
 
 # # Configs  
 
-# In[27]:
+# In[2]:
 
 
 log = snmcseq_utils.create_logger()
 logging.info('*')
 
 
-# In[28]:
+# In[3]:
 
 
-DATA_DIR = '/cndd/fangming/CEMBA/data/MOp_all/organized_neurons_v8'
+DATA_DIR = '/cndd/fangming/CEMBA/data/MOp_all/data_freeze_neurons'
 
 # fixed dataset configs
 sys.path.insert(0, DATA_DIR)
@@ -58,38 +58,38 @@ hvftrs_gene = os.path.join(DATA_DIR, '{0}_hvfeatures.gene')
 hvftrs_cell = os.path.join(DATA_DIR, '{0}_hvfeatures.cell')
 
 
-# In[35]:
+# In[4]:
 
 
 ps = [0.01, 0.02, 0.04, 0.1, 0.2, 0.4, 0.8, 1]
 mods_selected = [
-    # 'snmcseq_gene',
+    'snmcseq_gene',
     'snatac_gene',
     'smarter_cells',
     'smarter_nuclei',
-    # '10x_cells', 
-    # '10x_cells_v3',
-    # '10x_nuclei_v3',
-    # '10x_nuclei_v3_Macosko',
+    '10x_cells_v2', 
+    '10x_cells_v3',
+    '10x_nuclei_v3',
+    '10x_nuclei_v3_macosko',
     ]
 resolutions = [0.1, 0.2, 0.4, 0.8, 1, 2, 3, 4, 6, 8, 12, 16, 20, 30, 40, 60, 80, 100, 120]
+
 logging.info(ps)
 logging.info(' '.join(mods_selected))
 
 
-# In[34]:
+# In[31]:
 
 
 for p, mod in itertools.product(ps, mods_selected):
     logging.info(p)
     logging.info(mod)
     
-    name = 'mop_cv_one_dataset_p{}_{}_190718'.format(int(p*100), mod)
+    name = 'mop_cv_one_dataset_p{}_{}_191008'.format(int(p*100), mod)
     outdir = '/cndd/fangming/CEMBA/data/MOp_all/results'
     output_results = outdir + '/cross_validation_results_{}.pkl'.format(name)
     output_figures = outdir + '/figures/{}_{{}}.{{}}'.format(name)
     output_prefix =  '/cndd/fangming/test_outputs/cluster_cv_single_{}'.format(name)
-
 
     # gene chrom lookup
     chroms = np.arange(1, 20, 1).tolist() + ['X']
@@ -97,22 +97,21 @@ for p, mod in itertools.product(ps, mods_selected):
 
     f = PATH_GENEBODY_ANNOTATION
     df_genes = pd.read_csv(f, sep="\t")
-    gene_chrom_lookup = (df_genes[df_genes['chr'].isin(chroms)]
-                                .groupby('gene_name').first()['chr']
-                                .replace('chrX', 'chr20')
-                                .apply(lambda x: int(x[3:]))
-                       ) # 1:20
+    # modify this
+    
+    # gene_chrom_lookup
+    df_genes = df_genes[df_genes['chr'].isin(chroms)]
+    df_genes['gid'] = df_genes['gene_id'].apply(lambda x: x.split('.')[0])
+    df_genes = df_genes.set_index('gid')
+    gene_chrom_lookup = df_genes['chr'].replace('chrX', 'chr20').apply(lambda x: int(x[3:]))
+    # 1:20
 
     metadata = pd.read_csv(meta_f.format(mod), sep="\t").reset_index().set_index(settings[mod].cell_col)
-    if len(metadata)*p < 200:
-        logging.info("Skip ({} {}) (less than 200 cells)".format(p, mod))
-        continue
 
     ti = time.time()
     if settings[mod].mod_category == 'mc':
         f_mat = hvftrs_f.format(mod, 'tsv')
         gxc_hvftr = pd.read_csv(f_mat, sep='\t', header=0, index_col=0) 
-        gxc_hvftr.index = SCF_utils.standardize_gene_name(gxc_hvftr.index)  # standardize gene name 
         assert np.all(gxc_hvftr.columns.values == metadata.index.values) # make sure cell name is in the sanme order as metas (important if save knn mat)
         print(gxc_hvftr.shape, time.time()-ti)
     else: 
@@ -123,12 +122,11 @@ for p, mod in itertools.product(ps, mods_selected):
         _gene = _gxc_tmp.gene
         _cell = _gxc_tmp.cell
         _mat = _gxc_tmp.data
-        _gene = SCF_utils.standardize_gene_name(_gene)  # standardize gene name  
 
         gxc_hvftr = pd.DataFrame(_mat.todense(), index=_gene, columns=_cell)
         assert np.all(gxc_hvftr.columns.values == metadata.index.values) # make sure cell name is in the sanme order as metas (important if save knn mat)
         print(gxc_hvftr.shape, time.time()-ti)
-
+        
     # subsample cells
     if 1 - p > 1e-5:
         metadata_sub, gxc_hvftr_sub = subsampling_lite(metadata, gxc_hvftr, p)
@@ -145,7 +143,8 @@ for p, mod in itertools.product(ps, mods_selected):
                                       output_prefix,
                                       k=30, 
                                       reduce_dim=0,
-                                      nfolds=5, n_repeats=5, n_splits=5, split_frac=0.5)
+                                      nfolds=5, n_repeats=5, n_splits=5, split_frac=0.5, 
+                                     )
 
     # Saving the objects:
     with open(output_results, 'wb') as f: 
@@ -172,7 +171,7 @@ for p, mod in itertools.product(ps, mods_selected):
 
     x = res_nclsts_summary['nclsts']['mean'].values
     ys = res_summary #.xs(mod, level='mod')
-    base_level = np.min(ys['mse']['mean'].values)
+    base_level = np.nanmin(ys['mse']['mean'].values)
     y, y_err = ys['mse']['mean'].values/base_level, (ys['mse']['std'].values/np.sqrt(n_folds))/base_level, 
     yt, yt_err = ys['mse_t']['mean'].values/base_level, (ys['mse_t']['std'].values/np.sqrt(n_folds))/base_level, 
 
@@ -186,10 +185,9 @@ for p, mod in itertools.product(ps, mods_selected):
                       ylabel=ylabel
                      )
     ax.yaxis.set_major_locator(mtick.MaxNLocator(4))
-    ax.set_title(ax.get_title() + '\n{} cells ({})'.format(len(metadata_sub), p))
+    ax.set_title('{} {} {}'.format(mod, p, len(metadata_sub)))
 
     fig.subplots_adjust(wspace=0.1, bottom=0.15)
     fig.text(0.5, 0, 'Number of clusters', ha='center', fontsize=15)
     fig.savefig(output, bbox_inches='tight')
     plt.show()
-

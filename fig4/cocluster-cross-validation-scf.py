@@ -25,7 +25,7 @@ from cluster_cv_utils import *
 
 # # Configs  
 
-DATA_DIR = '/cndd/fangming/CEMBA/data/MOp_all/organized_neurons_v8'
+DATA_DIR = '/cndd/fangming/CEMBA/data/MOp_all/data_freeze_neurons'
 # fixed dataset configs
 sys.path.insert(0, DATA_DIR)
 from __init__datasets import *
@@ -40,13 +40,13 @@ mods_selected = [
     'snatac_gene',
     'smarter_cells',
     'smarter_nuclei',
-    '10x_cells', 
+    '10x_cells_v2', 
     '10x_cells_v3',
     '10x_nuclei_v3', 
-    '10x_nuclei_v3_Macosko',
+    '10x_nuclei_v3_macosko',
     ]
 
-features_selected = ['10x_cells']
+features_selected = ['10x_cells_v2']
 # check features
 for features_modality in features_selected:
     assert (features_modality in mods_selected)
@@ -89,11 +89,12 @@ chroms = ['chr'+str(chrom) for chrom in chroms]
 
 f = PATH_GENEBODY_ANNOTATION
 df_genes = pd.read_csv(f, sep="\t")
-gene_chrom_lookup = (df_genes[df_genes['chr'].isin(chroms)]
-                            .groupby('gene_name').first()['chr']
-                            .replace('chrX', 'chr20')
-                            .apply(lambda x: int(x[3:]))
-                   ) # 1:20
+# gene_chrom_lookup
+df_genes = df_genes[df_genes['chr'].isin(chroms)]
+df_genes['gid'] = df_genes['gene_id'].apply(lambda x: x.split('.')[0])
+df_genes = df_genes.set_index('gid')
+gene_chrom_lookup = df_genes['chr'].replace('chrX', 'chr20').apply(lambda x: int(x[3:]))
+# 1:20
 
 metas = collections.OrderedDict()
 for mod in mods_selected:
@@ -108,7 +109,6 @@ for mod in mods_selected:
     if settings[mod].mod_category == 'mc':
         f_mat = hvftrs_f.format(mod, 'tsv')
         gxc_hvftrs[mod] = pd.read_csv(f_mat, sep='\t', header=0, index_col=0) 
-        gxc_hvftrs[mod].index = SCF_utils.standardize_gene_name(gxc_hvftrs[mod].index)  # standardize gene name 
         print(gxc_hvftrs[mod].shape, time.time()-ti)
         assert np.all(gxc_hvftrs[mod].columns.values == metas[mod].index.values) # make sure cell name is in the sanme order as metas (important if save knn mat)
         continue
@@ -121,20 +121,19 @@ for mod in mods_selected:
     _cell = _gxc_tmp.cell
     _mat = _gxc_tmp.data
 
-    _gene = SCF_utils.standardize_gene_name(_gene)  # standardize gene name  
     gxc_hvftrs[mod] = GC_matrix(_gene, _cell, _mat)
     assert np.all(gxc_hvftrs[mod].cell == metas[mod].index.values) # make sure cell name is in the sanme order as metas (important if save knn mat)
     print(gxc_hvftrs[mod].data.shape, time.time()-ti)
     
 
 resolutions = [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 3, 4, 6, 8, 12, 16, 20, 30, 40, 60, 80, 100, 120]
-# ns = [1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000]
-ns = [100000, 200000]
+ns = [1000, 2000, 5000, 10000, 20000, 50000, 100000, 200000]
+# ns = [100000, 200000]
 n_splits = 10
 n_repeats = 5
 
 for n in ns:
-    name = 'mop_cv_scf_8mods_n{}_190729'.format(n)
+    name = 'mop_cv_scf_8mods_n{}_191008'.format(n)
     outdir = '/cndd/fangming/CEMBA/data/MOp_all/results'
     output_results = outdir + '/cross_validation_results_{}.pkl'.format(name)
     output_pcX_all = outdir + '/pcX_all_{}.npy'.format(name)
