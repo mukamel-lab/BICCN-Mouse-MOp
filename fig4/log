@@ -1,7 +1,118 @@
-07/17/2019 11:00:43 AM *
-07/17/2019 11:00:43 AM [1.  0.9 0.8 0.7 0.6 0.5 0.4 0.3 0.2 0.1]
-07/17/2019 11:00:43 AM 10x_cells
-07/17/2019 11:00:43 AM 1.0
-07/17/2019 11:00:43 AM 10x_cells
-07/17/2019 11:01:00 AM Cluster chrom: [ 5  3  7  6 13 15 11 14], feature chrom [ 9  1 19  4 18  2 17 10  8 16 20 12]
-07/17/2019 11:01:01 AM Finish split: (4050, 117688) -> (1565, 117688) (2147, 117688)
+02/28/2020 04:39:00 PM * Begin integration
+02/28/2020 04:39:00 PM Metadata snmcseq_gene (5409, 32)
+02/28/2020 04:39:00 PM Metadata snatac_gene (34044, 13)
+02/28/2020 04:39:01 PM Metadata smarter_cells (2455, 129)
+02/28/2020 04:39:01 PM Metadata smarter_nuclei (2305, 146)
+02/28/2020 04:39:02 PM Metadata 10x_cells_v2 (63886, 8)
+02/28/2020 04:39:02 PM Metadata 10x_cells_v3 (45149, 8)
+02/28/2020 04:39:02 PM Metadata 10x_nuclei_v3 (21824, 8)
+02/28/2020 04:39:03 PM Metadata 10x_nuclei_v3_macosko (59654, 19)
+02/28/2020 04:39:08 PM Metadata merfish (91627, 9)
+02/28/2020 04:39:08 PM Metadata epi_retro (1110, 12)
+02/28/2020 04:39:08 PM Metadata patchseq (253, 115)
+02/28/2020 04:39:36 PM Feature matrix snmcseq_gene (4805, 5409)
+02/28/2020 04:39:46 PM Feature matrix snatac_gene (6300, 34044)
+02/28/2020 04:39:50 PM Feature matrix smarter_cells (5810, 2455)
+02/28/2020 04:39:51 PM Feature matrix smarter_nuclei (5373, 2305)
+02/28/2020 04:40:35 PM Feature matrix 10x_cells_v2 (4032, 63886)
+02/28/2020 04:41:19 PM Feature matrix 10x_cells_v3 (4644, 45149)
+02/28/2020 04:41:24 PM Feature matrix 10x_nuclei_v3 (4149, 21824)
+02/28/2020 04:41:43 PM Feature matrix 10x_nuclei_v3_macosko (4150, 59654)
+02/28/2020 04:41:45 PM Feature matrix merfish (254, 91627)
+02/28/2020 04:41:50 PM Feature matrix epi_retro (12261, 1110)
+02/28/2020 04:41:51 PM Feature matrix patchseq (8100, 253)
+02/28/2020 04:41:51 PM Done reading data
+02/28/2020 04:41:51 PM Smoothing within modalities...
+02/28/2020 04:41:54 PM snmcseq_gene: 3.6477468013763428
+02/28/2020 04:42:37 PM snatac_gene: 42.7386155128479
+02/28/2020 04:42:40 PM smarter_cells: 2.7575764656066895
+02/28/2020 04:42:42 PM smarter_nuclei: 2.206549644470215
+02/28/2020 04:43:35 PM 10x_cells_v2: 52.95190358161926
+02/28/2020 04:44:48 PM 10x_cells_v3: 73.1149537563324
+02/28/2020 04:45:35 PM 10x_nuclei_v3: 46.889506101608276
+02/28/2020 04:48:04 PM 10x_nuclei_v3_macosko: 149.4390721321106
+02/28/2020 04:48:23 PM merfish: 18.92941951751709
+02/28/2020 04:48:24 PM epi_retro: 1.0647592544555664
+02/28/2020 04:48:25 PM patchseq: 0.22225332260131836
+02/28/2020 04:48:25 PM Constructing a joint matrix...
+02/28/2020 04:48:25 PM Imputing into 10x_cells_v2 space...
+02/28/2020 04:48:25 PM for snmcseq_gene cells...
+02/28/2020 04:50:13 PM for snatac_gene cells...
+02/28/2020 04:56:18 PM for smarter_cells cells...
+02/28/2020 05:00:30 PM for smarter_nuclei cells...
+02/28/2020 05:03:49 PM for 10x_cells_v2 cells...
+02/28/2020 05:03:49 PM for 10x_cells_v3 cells...
+02/28/2020 05:28:17 PM for 10x_nuclei_v3 cells...
+02/28/2020 05:40:25 PM for 10x_nuclei_v3_macosko cells...
+02/28/2020 06:03:27 PM for merfish cells...
+02/28/2020 06:07:43 PM for epi_retro cells...
+02/28/2020 06:12:52 PM for patchseq cells...
+02/28/2020 06:17:11 PM Saved output to: /cndd/fangming/CEMBA/data/MOp_all/results/pcX_all_mop_11mods_it_atac_200227.npy
+02/28/2020 06:17:11 PM Saved output to: /cndd/fangming/CEMBA/data/MOp_all/results/cells_all_mop_11mods_it_atac_200227.npy
+02/28/2020 06:17:12 PM Done integration into a common PC space
+02/28/2020 06:17:12 PM resolution r: 0.1
+02/28/2020 06:18:57 PM resolution r: 0.2
+02/28/2020 06:20:37 PM resolution r: 0.4
+02/28/2020 06:22:19 PM resolution r: 0.8
+02/28/2020 06:23:58 PM Running UMAP: 60 n_neighbors, 0.5 min_dist , 2 dim.
+Input shape: (327716, 50)
+02/28/2020 06:51:10 PM Done with tSNE. running time: 1632.3080179691315 seconds.
+02/28/2020 06:51:14 PM Done clustering and UMAP
+Time used to build kNN map 0.15429067611694336
+Time used to get kNN 0.275775671005249
+Time used to build kNN map 0.7419023513793945
+Time used to get kNN 2.616973400115967
+Time used to build kNN map 0.12094688415527344
+Time used to get kNN 0.12565350532531738
+Time used to build kNN map 0.05662941932678223
+Time used to get kNN 0.13533806800842285
+Time used to build kNN map 1.3119211196899414
+Time used to get kNN 4.297190427780151
+Time used to build kNN map 0.9823257923126221
+Time used to get kNN 3.0512092113494873
+Time used to build kNN map 0.5398092269897461
+Time used to get kNN 1.2448022365570068
+Time used to build kNN map 1.329190969467163
+Time used to get kNN 4.017972946166992
+Time used to build kNN map 2.0286943912506104
+Time used to get kNN 7.238873720169067
+Time used to build kNN map 0.047361135482788086
+Time used to get kNN 0.10588669776916504
+Time used to build kNN map 0.0052187442779541016
+Time used to get kNN 0.010354280471801758
+(327716, 10)
+modality
+10x_cells_v2             63886
+10x_cells_v3             45149
+10x_nuclei_v3            21824
+10x_nuclei_v3_macosko    59654
+epi_retro                 1110
+merfish                  91627
+patchseq                   253
+smarter_cells             2455
+smarter_nuclei            2305
+snatac_gene              34044
+snmcseq_gene              5409
+dtype: int64
+(53379, 7)
+snmcseq_gene
+snmcseq_gene Reading in files 2.9325485229492188e-05
+Traceback (most recent call last):
+  File "/cndd/fangming/CEMBA/snmcseq_dev/SCF_notebook_routine.py", line 638, in <module>
+    gxc_ftrs[mod] = pd.read_csv(f_data, sep='\t', index_col=0)
+  File "/cndd/fangming/venvs/conda_dobro/lib/python3.6/site-packages/pandas/io/parsers.py", line 702, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/cndd/fangming/venvs/conda_dobro/lib/python3.6/site-packages/pandas/io/parsers.py", line 429, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/cndd/fangming/venvs/conda_dobro/lib/python3.6/site-packages/pandas/io/parsers.py", line 895, in __init__
+    self._make_engine(self.engine)
+  File "/cndd/fangming/venvs/conda_dobro/lib/python3.6/site-packages/pandas/io/parsers.py", line 1122, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/cndd/fangming/venvs/conda_dobro/lib/python3.6/site-packages/pandas/io/parsers.py", line 1853, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 387, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 705, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: [Errno 2] File b'/cndd/fangming/CEMBA/data/MOp_all/data_freeze_it/snmcseq_gene_features.tsv' does not exist: b'/cndd/fangming/CEMBA/data/MOp_all/data_freeze_it/snmcseq_gene_features.tsv'
+Command exited with non-zero status 1
+8909.58user 1968.93system 2:18:21elapsed 131%CPU (0avgtext+0avgdata 31509344maxresident)k
+26510704inputs+21049832outputs (507major+242916830minor)pagefaults 0swaps

@@ -1,0 +1,111 @@
+05/05/2020 04:22:27 PM * Begin integration
+05/05/2020 04:22:27 PM Metadata snmcseq_gene (5339, 32)
+05/05/2020 04:22:27 PM Metadata smarter_cells (2450, 129)
+05/05/2020 04:22:27 PM Metadata smarter_nuclei (2304, 146)
+05/05/2020 04:22:27 PM Metadata 10x_cells_v2 (63239, 8)
+05/05/2020 04:22:27 PM Metadata 10x_cells_v3 (45075, 8)
+05/05/2020 04:22:27 PM Metadata 10x_nuclei_v3 (21813, 8)
+05/05/2020 04:22:28 PM Metadata 10x_nuclei_v3_macosko (59639, 19)
+05/05/2020 04:22:28 PM Metadata merfish (112080, 15)
+05/05/2020 04:22:28 PM Metadata epi_retro (1110, 12)
+05/05/2020 04:22:28 PM Metadata patchseq (253, 115)
+05/05/2020 04:22:42 PM Feature matrix snmcseq_gene (4810, 5339)
+05/05/2020 04:22:43 PM Feature matrix smarter_cells (5805, 2450)
+05/05/2020 04:22:43 PM Feature matrix smarter_nuclei (5373, 2304)
+05/05/2020 04:22:53 PM Feature matrix 10x_cells_v2 (4027, 63239)
+05/05/2020 04:23:05 PM Feature matrix 10x_cells_v3 (4644, 45075)
+05/05/2020 04:23:07 PM Feature matrix 10x_nuclei_v3 (4149, 21813)
+05/05/2020 04:23:17 PM Feature matrix 10x_nuclei_v3_macosko (4149, 59639)
+05/05/2020 04:23:19 PM Feature matrix merfish (254, 112080)
+05/05/2020 04:23:24 PM Feature matrix epi_retro (12261, 1110)
+05/05/2020 04:23:24 PM Feature matrix patchseq (8100, 253)
+05/05/2020 04:23:24 PM Done reading data
+05/05/2020 04:23:24 PM Smoothing within modalities...
+05/05/2020 04:23:26 PM snmcseq_gene: 2.1001808643341064
+05/05/2020 04:23:27 PM smarter_cells: 1.0069513320922852
+05/05/2020 04:23:28 PM smarter_nuclei: 0.972736120223999
+05/05/2020 04:23:52 PM 10x_cells_v2: 23.468571662902832
+05/05/2020 04:24:09 PM 10x_cells_v3: 17.63520622253418
+05/05/2020 04:24:18 PM 10x_nuclei_v3: 8.443366765975952
+05/05/2020 04:24:41 PM 10x_nuclei_v3_macosko: 23.438446283340454
+05/05/2020 04:24:54 PM merfish: 12.428555965423584
+05/05/2020 04:24:55 PM epi_retro: 0.8030538558959961
+05/05/2020 04:24:55 PM patchseq: 0.19036388397216797
+05/05/2020 04:24:55 PM Constructing a joint matrix...
+05/05/2020 04:24:55 PM Imputing into 10x_cells_v2 space...
+05/05/2020 04:24:55 PM for snmcseq_gene cells...
+05/05/2020 04:26:15 PM for smarter_cells cells...
+05/05/2020 04:27:52 PM for smarter_nuclei cells...
+05/05/2020 04:29:14 PM for 10x_cells_v2 cells...
+05/05/2020 04:29:14 PM for 10x_cells_v3 cells...
+05/05/2020 04:37:52 PM for 10x_nuclei_v3 cells...
+05/05/2020 04:42:48 PM for 10x_nuclei_v3_macosko cells...
+05/05/2020 04:51:49 PM for merfish cells...
+05/05/2020 04:55:08 PM for epi_retro cells...
+05/05/2020 04:57:34 PM for patchseq cells...
+05/05/2020 04:59:34 PM Saved output to: /cndd/fangming/CEMBA/data/MOp_all/results/pcX_all_mop_11mods_it_noatac_200505.npy
+05/05/2020 04:59:34 PM Saved output to: /cndd/fangming/CEMBA/data/MOp_all/results/cells_all_mop_11mods_it_noatac_200505.npy
+05/05/2020 04:59:34 PM Done integration into a common PC space
+05/05/2020 04:59:34 PM resolution r: 0.1
+05/05/2020 05:00:31 PM resolution r: 0.2
+05/05/2020 05:01:28 PM resolution r: 0.4
+05/05/2020 05:02:27 PM resolution r: 0.8
+05/05/2020 05:03:26 PM Running UMAP: 60 n_neighbors, 0.5 min_dist , 2 dim.
+Input shape: (313302, 50)
+05/05/2020 05:19:46 PM Done with tSNE. running time: 979.8268945217133 seconds.
+05/05/2020 05:19:48 PM Done clustering and UMAP
+Time used to build kNN map 0.15280628204345703
+Time used to get kNN 0.2538795471191406
+Time used to build kNN map 0.0625460147857666
+Time used to get kNN 0.1329481601715088
+Time used to build kNN map 0.036110877990722656
+Time used to get kNN 0.09432125091552734
+Time used to build kNN map 1.1591038703918457
+Time used to get kNN 3.47062349319458
+Time used to build kNN map 0.853438138961792
+Time used to get kNN 2.292407512664795
+Time used to build kNN map 0.42525291442871094
+Time used to get kNN 1.2207822799682617
+Time used to build kNN map 1.1063621044158936
+Time used to get kNN 3.4057278633117676
+Time used to build kNN map 2.202833890914917
+Time used to get kNN 7.5777082443237305
+Time used to build kNN map 0.028244972229003906
+Time used to get kNN 0.05443739891052246
+Time used to build kNN map 0.0055043697357177734
+Time used to get kNN 0.010148286819458008
+(313302, 10)
+modality
+10x_cells_v2              63239
+10x_cells_v3              45075
+10x_nuclei_v3             21813
+10x_nuclei_v3_macosko     59639
+epi_retro                  1110
+merfish                  112080
+patchseq                    253
+smarter_cells              2450
+smarter_nuclei             2304
+snmcseq_gene               5339
+dtype: int64
+(53379, 7)
+snmcseq_gene
+snmcseq_gene Reading in files 2.4080276489257812e-05
+Traceback (most recent call last):
+  File "/cndd/fangming/CEMBA/snmcseq_dev/SCF_notebook_routine.py", line 638, in <module>
+    gxc_ftrs[mod] = pd.read_csv(f_data, sep='\t', index_col=0)
+  File "/cndd/fangming/venvs/conda_dobro/lib/python3.6/site-packages/pandas/io/parsers.py", line 702, in parser_f
+    return _read(filepath_or_buffer, kwds)
+  File "/cndd/fangming/venvs/conda_dobro/lib/python3.6/site-packages/pandas/io/parsers.py", line 429, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/cndd/fangming/venvs/conda_dobro/lib/python3.6/site-packages/pandas/io/parsers.py", line 895, in __init__
+    self._make_engine(self.engine)
+  File "/cndd/fangming/venvs/conda_dobro/lib/python3.6/site-packages/pandas/io/parsers.py", line 1122, in _make_engine
+    self._engine = CParserWrapper(self.f, **self.options)
+  File "/cndd/fangming/venvs/conda_dobro/lib/python3.6/site-packages/pandas/io/parsers.py", line 1853, in __init__
+    self._reader = parsers.TextReader(src, **kwds)
+  File "pandas/_libs/parsers.pyx", line 387, in pandas._libs.parsers.TextReader.__cinit__
+  File "pandas/_libs/parsers.pyx", line 705, in pandas._libs.parsers.TextReader._setup_parser_source
+FileNotFoundError: [Errno 2] File b'/cndd2/fangming/projects/miniatlas/data/data_freeze_it_v2/snmcseq_gene_features.tsv' does not exist: b'/cndd2/fangming/projects/miniatlas/data/data_freeze_it_v2/snmcseq_gene_features.tsv'
+Command exited with non-zero status 1
+4966.93user 338.95system 59:50.59elapsed 147%CPU (0avgtext+0avgdata 28618360maxresident)k
+5280464inputs+20088952outputs (141major+145301778minor)pagefaults 0swaps
