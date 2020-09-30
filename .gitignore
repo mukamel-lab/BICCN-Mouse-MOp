@@ -1,5 +1,7 @@
 *.log
 log_*
+log*
 .ipynb*
 __pycache__
 fig4/obsolete
+flagship_fig8/results_replicate
