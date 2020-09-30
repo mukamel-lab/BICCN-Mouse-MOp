@@ -9,7 +9,7 @@ The .ipynb notebooks contain code to regenerate the exact figure panels:
 - fig_e.ipynb
 
 The .py scripts contain utility functions used in the notebooks:
-- __init__.py
+- ```__init__.py```
 - utils.py
 - snmcseq_utils.py
 
